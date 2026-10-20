@@ -140,7 +140,15 @@ int main(void)
 
 static void mostrar_prompt(void)
 {
-    printf("minish> ");
+    char *directorio = getcwd(NULL, 0);
+
+    if (directorio != NULL) {
+        printf("minish:%s> ", directorio);
+        free(directorio);
+    } else {
+        printf("minish> ");
+    }
+
     fflush(stdout);
 }
 
