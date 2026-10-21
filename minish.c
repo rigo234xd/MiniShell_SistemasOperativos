@@ -15,7 +15,6 @@
 #include <time.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-
 #define MAX_ARGS 64
 #define MAX_TRABAJOS 128
 #define SAMPLE_INTERVAL_NS 20000000L /* 20 ms entre muestras de memoria */
@@ -140,7 +139,15 @@ int main(void)
 
 static void mostrar_prompt(void)
 {
-    printf("minish> ");
+    char *directorio = getcwd(NULL, 0);
+
+    if (directorio != NULL) {
+        printf("minish:%s> ", directorio);
+        free(directorio);
+    } else {
+        printf("minish> ");
+    }
+
     fflush(stdout);
 }
 
